@@ -109,7 +109,7 @@ export default function SlickSlider() {
                       alt="childrenmarketplace"
                       width={670} height={433}
                       style={{
-                        height: '100%',
+                        height: matches ? '443px' : '100%',
                         width: '100%',
                         objectFit: 'cover'
                       }}
@@ -137,7 +137,7 @@ export default function SlickSlider() {
                           pt: '17px',
                           color: 'white',
                           width: { lg: '700px', xs: '100%' },
-                          pb: { lg: 0, xs: 7 },
+                          // pb: { lg: 0, xs: 7 },
                           textAlign: { sm: 'center', xs: 'left' }
                         }}
                       >
@@ -150,7 +150,7 @@ export default function SlickSlider() {
                           pt: '17px',
                           color: 'white',
                           width: { lg: '700px', xs: '100%' },
-                          pb: { lg: 0, xs: 7 },
+                          // pb: { lg: 0, xs: 7 },
                           textAlign: { sm: 'center', xs: 'left' }
                         }}
                       >
@@ -188,7 +188,7 @@ export default function SlickSlider() {
                       alt="childrenmarketplace"
                       width={670} height={433}
                       style={{
-                        height: '100%',
+                        height: matches ? '443px' : '100%',
                         width: '100%',
                         objectFit: 'cover'
                       }}
@@ -264,7 +264,7 @@ export default function SlickSlider() {
                       alt="childrenmarketplace"
                       width={670} height={433}
                       style={{
-                        height: '100%',
+                        height: matches ? '443px' : '100%',
                         width: '100%',
                         objectFit: 'cover'
                       }}
@@ -471,7 +471,7 @@ export default function SlickSlider() {
                       width={670} height={433}
 
                       style={{
-                        height: '100%',
+                        height: matches ? '443px' : '100%',
                         width: '100%',
                         objectFit: 'cover'
                       }}
