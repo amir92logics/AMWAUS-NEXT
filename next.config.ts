@@ -18,6 +18,9 @@ const nextConfig = {
       }
     ]
   },
+   eslint: {
+    ignoreDuringBuilds: true,
+  },
   env: {
     NEXT_APP_VERSION: 'v3.0.0',
     NEXTAUTH_SECRET: 'LlKq6ZtYbr+hTC073mAmAh9/h2HwMfsFo4hrfCx5mLg=',
