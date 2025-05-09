@@ -1,22 +1,10 @@
+"use client"
 import React from 'react';
-import Header from 'components/header';
-import Footer from 'components/footer';
-import NewSeoSection from 'sections/home/NewSeoSection';
-import type { Metadata } from 'next';
-import BlogPage from 'sections/blogs/index';
+import { Container, Grid } from '@mui/material';
+import Blogs from 'sections/blogs/blog_list';
+import BlogsPage from 'sections/blogs/blogsPage';
 
-export const metadata: Metadata = {
-  title: 'Blogs-ChildrenKare',
-  description: `'At ChildrenKARE, we understand the importance of providing a secure and enriching environment for your child's growth. Read Best Daycare blogs here.'`,
-  openGraph: {
-    title: `Blogs-ChildrenKare`,
-    description: `'At ChildrenKARE, we understand the importance of providing a secure and enriching environment for your child's growth. Read Best Daycare blogs here.'`,
-    url: `http://localhost:3000/blogs`,
-  },
-  alternates: {
-    canonical: 'http://localhost:3000/blogs',  // ✅ Canonical URL
-  },
-};
+
 function Bloglist() {
   return (
     <>
@@ -35,12 +23,19 @@ function Bloglist() {
         <meta name="robots" content="nosnippet" />
         <link rel="canonical" href="https://childrenkare.com/blogs" />
       </MetaTags> */}
-      <Header />
-      <BlogPage />
 
-      <NewSeoSection />
+      <BlogsPage />
+      <Grid container sx={{ background: '#fff' }}>
+        <Container>
+          <Grid container>
+            <Grid xs={12} sm={12} md={12} lg={12} sx={{ px: 2 }}>
+              <Blogs />
+            </Grid>
+          </Grid>
+        </Container>
+      </Grid>
 
-      <Footer />
+    
     </>
   );
 }
