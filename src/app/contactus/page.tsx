@@ -16,10 +16,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Contact us`,
         description: `'Got questions about daycare services? Reach out to us! We're here to help. Contact us anytime for friendly assistance and quick answers.'`,
-        url: `http://localhost:3000/contactus`,
+        url: `${process.env.PUBLIC_URL}contactus`,
       },
     alternates: {
-        canonical: 'http://localhost:3000/contactus',  // ✅ Canonical URL
+        canonical: `${process.env.PUBLIC_URL}contactus`,  // ✅ Canonical URL
       },
     };
 function ContactUs() {

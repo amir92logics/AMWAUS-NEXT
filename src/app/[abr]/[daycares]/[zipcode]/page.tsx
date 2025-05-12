@@ -19,14 +19,8 @@ import axios from 'utils/axios'; // Custom axios instance
 // 👇 SSR-friendly data fetcher
 async function getAIData(_cityName: any, _state: any, _category?: any) {
   try {
-      const types = ['childcare', 'daycare-centers', 'city', 'infant-care', 'preschools', 'special-needs', 'toddler'];
-      let _tempCategory = _category.split('-')[0];
-  
-      // Check if the first word exists in the array
-      _tempCategory = types.find((_type) => _type.startsWith(_tempCategory));
-  
-    const response = await axios.get(`/api/city/get-content/${_tempCategory}?state=${_state}&city=${_cityName}}`);
-    return response.data.data ;
+    const response = await axios.get(`api/city/get-content/city?state=${_state}&city=${_cityName}`);
+    return response.data.data;
   } catch (error) {
     console.error('Failed to fetch state data:', error);
     return [];
@@ -70,31 +64,47 @@ async function getAIData(_cityName: any, _state: any, _category?: any) {
 
   // 👇 Optional dynamic meta
   export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-       const { abr, daycares, zipcode } = await params;
-      
-    return {
-        // title: zipcode && /^\d+$/.test(zipcode) ? `Best Daycares, Childcare & Preschools in ${zipcode}` : seoTitle ? seoTitle : `Best ${category ? (category == 'Childcare' ? 'Child Care' : category + (abr == 'daycare' ? ' Centers' : '')) : 'Daycares'} ${!location.pathname.includes('nearby') ? '' : 'Near Me'
-        //     } in cityName,
-        title: `${daycares}`,
-    description: `${daycares}`,
+      //  const { abr, daycares, zipcode } = await params;
+        const zipcode = await params.zipcode; // ✅ This is fine in a server component
+    const daycares = await params.daycares; // ✅ This is fine in a server component
+    const abr = await params.abr; // ✅ This is fine in a server component
+    const cityName = daycares.replace('daycares-in-', '').replace(/\-+/g, ' ');
+  let seoTitle = '';
+  let seoDescription = '';
+  let seoKeywords = '';
+    if(!/^\d+$/.test(`${zipcode}`)){
+ const data = await getAIData(zipcode, cityName , abr);
+   seoTitle = data.seo_title;
+   seoDescription = data.seo_description;
+   seoKeywords = data.lsi_keywords
+    }
+   
+
+  return {
+    // title: `${daycares}`,
+    title: seoTitle ? seoTitle : `Best Daycares, Childcare & Preschools in ${zipcode}`,
+    description: seoDescription ? seoDescription : `Find daycares near me in ${zipcode} for your children. Explore trusted child care services, preschools and best daycares in ${zipcode},${abr}; at affordable cost.`,
+    keywords: seoKeywords ? seoKeywords : `Find daycares near me in ${zipcode} for your children. Explore trusted child care services, preschools and best daycares in ${zipcode},${abr}; at affordable cost.`,
     openGraph: {
-        title: `${daycares}`,
-        description: `${daycares}`,
-        url: `http://localhost:3000/${abr}/${daycares}/${zipcode}`,
-      },
+      title: seoTitle ? seoTitle : `Best Daycares Near Me in ${cityName}`,
+      description: seoDescription ? seoDescription : `Find daycares in ${cityName}. Explore trusted child care and preschool services,
+  and explore best daycares in${cityName}; at affordable cost.`,
+      url:   `${process.env.PUBLIC_URL}${abr}/${daycares}/${zipcode}`,
+
+    },
     alternates: {
-        canonical: `http://localhost:3000/${abr}/${daycares}/${zipcode}`,  // ✅ Canonical URL
-      },
-    };
-  }
+      canonical: `${process.env.PUBLIC_URL}${abr}/${daycares}/${zipcode}`,  // ✅ Canonical URL
+    },
+  };
+}
 
   // 👇 Server Component
    async function SearchPage({ params }: PageProps){
     // const { zipcode, daycares, abr } = useParams();
-    const { abr, daycares, zipcode } = await params;
-    // const zipcode = await params.zipcode; // ✅ This is fine in a server component
-    // const daycares = await params.daycares; // ✅ This is fine in a server component
-    // const abr = await params.abr; // ✅ This is fine in a server component
+    // const { abr, daycares, zipcode } = await params;
+    const zipcode = await params.zipcode; // ✅ This is fine in a server component
+    const daycares = await params.daycares; // ✅ This is fine in a server component
+    const abr = await params.abr; // ✅ This is fine in a server component
     const data = await getAIData(zipcode, daycares , abr  );
        console.log(data, 'data..')
     return (

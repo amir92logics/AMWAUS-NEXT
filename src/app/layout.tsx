@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Find Best Daycares in USA | Affordable Prices | ChildrenKARE ',
     description: 'Discover best daycares in USA with ChildrenKARE. Find affordable options with prices, reviews and photos for a reliable daycare choice. Start your search now!',
     alternates: {
-        canonical: 'http://localhost:3000/',  // ✅ Canonical URL
+        canonical: `${process.env.PUBLIC_URL}`,  // ✅ Canonical URL
       },
     };
 

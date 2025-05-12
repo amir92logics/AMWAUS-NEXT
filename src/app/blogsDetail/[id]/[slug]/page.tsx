@@ -27,10 +27,10 @@ async function getStateData(id: number) {
     openGraph: {
         title: `${data?.title}`,
         description: `${data?.meta_description}`,
-        url: `http://localhost:3000/blogsDetail/${data?.id}/${data?.slug}`,
+        url: `${process.env.PUBLIC_URL}blogsDetail/${data?.id}/${data?.slug}`,
       },
     alternates: {
-        canonical: `http://localhost:3000/blogsDetail/${data?.id}/${data?.slug}`,  // ✅ Canonical URL
+        canonical: `${process.env.PUBLIC_URL}blogsDetail/${data?.id}/${data?.slug}`,  // ✅ Canonical URL
       },
     };
   }

@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Privacy Policy`,
         description: `'Explore our Privacy Policy to understand how we safeguard your information at ChildrenKARE. Your privacy and security are paramount to us.'`,
-        url: `http://localhost:3000/privacypolicy`,
+        url: `${process.env.PUBLIC_URL}privacypolicy`,
       },
     alternates: {
-        canonical: 'http://localhost:3000/privacypolicy',  // ✅ Canonical URL
+        canonical: `${process.env.PUBLIC_URL}privacypolicy`,  // ✅ Canonical URL
       },
     };
 

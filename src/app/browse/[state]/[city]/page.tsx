@@ -10,19 +10,24 @@ import NewSeoSection from 'sections/home/NewSeoSection';
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
 
+  interface PageProps {
+  params: {
+    city: string;
+    state: string;
+  };
+}
 
-
-const Statedetail = ({ params }: { params: { state: string, city: string } }) => {
+const Statedetail = async ({ params }: PageProps) => {
     // const router = useRouter();
-
-    const stateName = params.state; // ✅ This is fine in a server component
-    const cityName = params.city; // ✅ This is fine in a server component
+const { state, city } = await params;
+    // const state = params.state; // ✅ This is fine in a server component
+    // const city = params.city; // ✅ This is fine in a server component
   const categories = [{name: 'Daycares', type: 'daycare'}, {name: 'Child Care', type: 'childcare'}, {name: 'Infant Daycares', type: 'infant-daycares'}, {name: 'Toddler Daycares', type: 'toddler-daycares'}, {name: 'In Home Daycares', type: 'in-home-daycares'}, {name: 'Preschools', type: 'preschools'}];
 //   const navigateToCityDetail = (state: any) => {
 //     // localStorage.setItem('params-search', 'true');
 //     dispatch(setIsParams(true));
 
-//     // router.push(`/${state.type}/${stateName.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`);
+//     // router.push(`/${state.type}/${state.toLowerCase()}/${city.toLowerCase().replace(/\s+/g, '-')}`);
 //   };
   function capitalizeFirstLetter(word: any) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -42,14 +47,14 @@ const Statedetail = ({ params }: { params: { state: string, city: string } }) =>
                   pr: { md: 0, xs: 3 }
                 }}
               >
-              Browse Child Care Providers in {cityName?.replace('-', ' ')}, {stateName.toUpperCase()}
+              Browse Child Care Providers in {city?.replace('-', ' ')}, {state.toUpperCase()}
               </Typography>
             </Stack>
             <Grid container spacing={2} mt={4}>
-                  {categories.map((state: any, index: number) => (
+                  {categories.map((_state: any, index: number) => (
                     <Grid item key={index} xs={12}>
                       <Link
-                                               href={state.type == 'daycare' ? process.env.PUBLIC_URL+`/${stateName.toLowerCase()}/daycares-in-${cityName.toLowerCase().replace(/\s+/g, '-')}`: process.env.PUBLIC_URL+`/${state.type}/${stateName.toLowerCase()}/${cityName.toLowerCase().replace(/\s+/g, '-')}`}
+                                               href={_state.type == 'daycare' ? process.env.PUBLIC_URL+`/${state.toLowerCase()}/daycares-in-${city.toLowerCase().replace(/\s+/g, '-')}`: process.env.PUBLIC_URL+`/${_state.type}/${state.toLowerCase()}/${city.toLowerCase().replace(/\s+/g, '-')}`}
                         // onClick={() => navigateToCityDetail(state)}
                         // variant="bodytext"
                         style={{
@@ -60,7 +65,7 @@ const Statedetail = ({ params }: { params: { state: string, city: string } }) =>
                   fontSize: '14px',
                 }}
                       >
-                        {state.name} in {capitalizeFirstLetter(cityName)}, {stateName.toUpperCase()}
+                        {_state.name} in {capitalizeFirstLetter(city)}, {state.toUpperCase()}
                       </Link>
                     </Grid>
                   ))}

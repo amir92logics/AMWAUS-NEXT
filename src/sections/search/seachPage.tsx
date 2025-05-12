@@ -299,11 +299,11 @@ interface SearchProps {
     const [resetMarketPlace, setResetMarketPlace] = useState(false);
     const CloseResetMarketPlace = () => setResetMarketPlace(false);
     const [isDetailsModalOpen, setDetailsModalOpen] = useState(false);
-    console.log(isDetailsModalOpen);
+    // console.log(isDetailsModalOpen);
     const handleCloseDetailsModal = () => setDetailsModalOpen(false);
-    console.log(handleCloseDetailsModal);
+    // console.log(handleCloseDetailsModal);
     const [selectedChil, setSelectedChild] = useState<any>('');
-    console.log(city, process.env.PUBLIC_URL + location.pathname, 'parseInt');
+    // console.log(city, process.env.PUBLIC_URL + location.pathname, 'parseInt');
     const handleConfirm = () => {
       setFields([
         {
@@ -844,7 +844,7 @@ interface SearchProps {
         });
   
     };
-    console.log(aiContent, 'updatedHtml');
+    // console.log(aiContent, 'updatedHtml');
   
     const emptyFeilds = () => {
       setFields([
@@ -1703,7 +1703,7 @@ interface SearchProps {
           setIsLoading(false);
         });
     };
-    console.log(showMarketPlaceHeader, 'closingTime');
+    // console.log(showMarketPlaceHeader, 'closingTime');
     const handlesearchMarketPlaceByFilters = () => {
       // let _tempList: any = [...marketPlaceFilteredData];
       let _tempFilteredArr: any = [...marketPlaceFilteredData];

@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Blogs-ChildrenKare`,
         description: `'At ChildrenKARE, we understand the importance of providing a secure and enriching environment for your child's growth. Read Best Daycare blogs here.'`,
-        url: `http://localhost:3000/blogs`,
+        url: `${process.env.PUBLIC_URL}blogs`,
       },
     alternates: {
-        canonical: 'http://localhost:3000/blogs',  // ✅ Canonical URL
+        canonical: `${process.env.PUBLIC_URL}blogs`,  // ✅ Canonical URL
       },
     };
 function Bloglist() {

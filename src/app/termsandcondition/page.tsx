@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: `Terms and Conditions`,
         description: `'Discover ChildrenKARE Terms and Conditions. We are your trusted guide to finding the perfect daycare for your child. Simplifying search, ensuring reliability and prioritizing your family's needs.'`,
-        url: `http://localhost:3000/termsandcondition`,
+        url: `${process.env.PUBLIC_URL}termsandcondition`,
       },
     alternates: {
-        canonical: 'http://localhost:3000/termsandcondition',  // ✅ Canonical URL
+        canonical: `${process.env.PUBLIC_URL}termsandcondition`,  // ✅ Canonical URL
       },
     };
 
