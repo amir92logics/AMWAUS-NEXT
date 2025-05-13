@@ -19,7 +19,7 @@ async function getStateData(state: string) {
 }
 
 // 👇 Optional dynamic meta
-export async function generateMetadata({ params }: { params: { searchname: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const _searchname = params.searchname?.replace(/\s+/g, '-').toLowerCase();
   const data = await getStateData(_searchname);
   return {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: { searchname: strin
 }
 
 // 👇 Server Component
-export default async function CityDetail({ params }: { params: { searchname: string } }) {
+export default async function CityDetail({ params }: any) {
   const _searchname = params.searchname?.replace(/\s+/g, '-').toLowerCase();
   return (
     <>

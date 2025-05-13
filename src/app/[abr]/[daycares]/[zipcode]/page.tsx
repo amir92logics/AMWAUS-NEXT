@@ -7,13 +7,7 @@ import Footer from 'components/footer';
 import axios from 'utils/axios'; // Custom axios instance
 
 
-  interface PageProps {
-  params: {
-    zipcode: string;
-    abr: string;
-    daycares: string;
-  };
-}
+
 
 
 // 👇 SSR-friendly data fetcher
@@ -63,7 +57,7 @@ async function getAIData(_cityName: any, _state: any, _category?: any) {
 //     };
 
   // 👇 Optional dynamic meta
-  export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  export async function generateMetadata({ params }: any): Promise<Metadata> {
        const { abr, daycares, zipcode } = params;
     //     const zipcode = await params.zipcode; // ✅ This is fine in a server component
     // const daycares = await params.daycares; // ✅ This is fine in a server component
@@ -99,7 +93,7 @@ async function getAIData(_cityName: any, _state: any, _category?: any) {
 }
 
   // 👇 Server Component
-   async function SearchPage({ params }: PageProps){
+   async function SearchPage({ params }: any){
     // const { zipcode, daycares, abr } = useParams();
     // const { abr, daycares, zipcode } = await params;
     const zipcode = await params.zipcode; // ✅ This is fine in a server component

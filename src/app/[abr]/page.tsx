@@ -8,7 +8,7 @@ import NewSeoSection from 'sections/home/NewSeoSection';
 import Footer from 'components/footer';
 
 // 👇 SSR-friendly data fetcher
-async function getStateData(state: string) {
+async function getStateData(state: any) {
   try {
     const response = await axios.get(`api/search/get_cities/${state}`);
     console.log(response, 'await')
@@ -20,7 +20,7 @@ async function getStateData(state: string) {
 }
 
 // 👇 Optional dynamic meta
-export async function generateMetadata({ params }: { params: { abr: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const state = await params.abr?.replace('-', ' ');
   return {
     title: `Best Daycares in ${state} | ChildrenKARE`,
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: { abr: string } }):
 }
 
 // 👇 Server Component
-export default async function Statedetail({ params }: { params: { abr: string } }) {
+export default async function Statedetail({ params }: any) {
   const state = params.abr; // ✅ This is fine in a server component
   const data = await getStateData(state);
     console.log(data, 'await')

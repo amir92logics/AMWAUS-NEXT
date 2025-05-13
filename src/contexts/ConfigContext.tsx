@@ -1,26 +1,24 @@
-import { createContext, ReactElement } from 'react';
+import { createContext, ReactNode } from 'react';
 
 // project-imports
 import config from 'config';
 import useLocalStorage from 'hooks/useLocalStorage';
-import { MenuOrientation, ThemeDirection, ThemeMode } from 'config';
 
 // types
-import { CustomizationProps, FontFamily, I18n, PresetColor } from 'types/config';
+import { CustomizationProps, FontFamily, I18n, MenuOrientation, PresetColor, ThemeDirection, ThemeMode } from 'types/config';
 
 // initial state
 const initialState: CustomizationProps = {
   ...config,
   onChangeContainer: () => {},
-  onChangeLocalization: () => {},
-  onChangeMode: () => {},
-  onChangePresetColor: () => {},
-  onChangeDirection: () => {},
-  onChangeMiniDrawer: () => {},
-  onChangeThemeLayout: () => {},
-  onChangeMenuOrientation: () => {},
+  onChangeLocalization: (lang: I18n) => {},
+  onChangeMode: (mode: ThemeMode) => {},
+  onChangePresetColor: (theme: PresetColor) => {},
+  onChangeDirection: (direction: ThemeDirection) => {},
+  onChangeMiniDrawer: (miniDrawer: boolean) => {},
+  onChangeMenuOrientation: (menuOrientation: MenuOrientation) => {},
   onChangeMenuCaption: () => {},
-  onChangeFontFamily: () => {},
+  onChangeFontFamily: (fontFamily: FontFamily) => {},
   onChangeContrast: () => {}
 };
 
@@ -29,23 +27,16 @@ const initialState: CustomizationProps = {
 const ConfigContext = createContext(initialState);
 
 type ConfigProviderProps = {
-  children: ReactElement;
+  children: ReactNode;
 };
 
 function ConfigProvider({ children }: ConfigProviderProps) {
-  const [config, setConfig] = useLocalStorage('able-pro-material-next-ts-config', initialState);
+  const [config, setConfig] = useLocalStorage('able-pro-material-react-ts-config', initialState);
 
-  const onChangeContainer = (container: string) => {
-    let containerValue: boolean;
-
-    if (container === 'fluid') {
-      containerValue = false;
-    } else {
-      containerValue = true;
-    }
+  const onChangeContainer = () => {
     setConfig({
       ...config,
-      container: containerValue
+      container: !config.container
     });
   };
 
@@ -84,39 +75,17 @@ function ConfigProvider({ children }: ConfigProviderProps) {
     });
   };
 
-  const onChangeThemeLayout = (direction: ThemeDirection, miniDrawer: boolean) => {
+  const onChangeContrast = () => {
     setConfig({
       ...config,
-      miniDrawer,
-      themeDirection: direction
+      themeContrast: !config.themeContrast
     });
   };
 
-  const onChangeContrast = (themeContrast: string) => {
-    let contrastValue: boolean;
-
-    if (themeContrast === 'contrast') {
-      contrastValue = true;
-    } else {
-      contrastValue = false;
-    }
+  const onChangeMenuCaption = () => {
     setConfig({
       ...config,
-      themeContrast: contrastValue
-    });
-  };
-
-  const onChangeMenuCaption = (menuCaption: string) => {
-    let captionValue: boolean;
-
-    if (menuCaption === 'caption') {
-      captionValue = true;
-    } else {
-      captionValue = false;
-    }
-    setConfig({
-      ...config,
-      menuCaption: captionValue
+      menuCaption: !config.menuCaption
     });
   };
 
@@ -144,7 +113,6 @@ function ConfigProvider({ children }: ConfigProviderProps) {
         onChangePresetColor,
         onChangeDirection,
         onChangeMiniDrawer,
-        onChangeThemeLayout,
         onChangeMenuOrientation,
         onChangeMenuCaption,
         onChangeFontFamily,

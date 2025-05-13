@@ -17,7 +17,7 @@ async function getAIData(_cityName: any, _state: any) {
 }
 
 // 👇 Optional dynamic meta
-export async function generateMetadata({ params }: { params: { abr: string, daycares: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   //      const { abr, daycares } = await params;
   // const zipcode = await params.zipcode; // ✅ This is fine in a server component
   const daycares = await params.daycares; // ✅ This is fine in a server component
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: { abr: string, dayc
 }
 
 // 👇 Server Component
-async function SearchPage({ params }: { params: { abr: string, daycares: string } }) {
+async function SearchPage({ params }: any) {
   // const { zipcode, daycares, abr } = useParams();
   // const { abr, daycares } = await params;
   // const zipcode = await params.zipcode; // ✅ This is fine in a server component

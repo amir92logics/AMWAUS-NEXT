@@ -2,6 +2,7 @@ import { Grid, Stack, Typography } from '@mui/material';
 import Message from 'assets/images/icons/message.png';
 import Phone from 'assets/images/icons/call.png';
 import Email from 'assets/images/icons/ContactUsEmail.png';
+import Image from 'next/image';
 
 function SectionFout() {
   return (
@@ -41,7 +42,15 @@ function SectionFout() {
         <Grid xs={12} sm={6} md={3} lg={3}>
           <Stack sx={{ background: '#FAFAFA', borderRadius: 2, py: 3, my: { xs: 4, sm: 4, md: 4 }, mx: 2,  }}>
             <Stack sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: 'center', alignItems: 'center' }}>
-              <img src={Message} alt='message' style={{height:'54px', width:'54px'}}/>
+              <Image
+                    width={54}
+                    height={54} 
+                      src={Message}
+                      alt={'message'}
+                      // fill
+                      // style={{ objectFit: 'contain' }}
+                    />
+              {/* <img src={Message} alt='message' style={{height:'54px', width:'54px'}}/> */}
             </Stack>
             <Typography
               variant="subheading3"
@@ -69,7 +78,15 @@ function SectionFout() {
         <Grid xs={12} sm={6} md={3} lg={3}>
           <Stack sx={{ background: '#FAFAFA', borderRadius: 2, py: 3, my: { xs: 4, sm: 4, md: 4 }, mx: 2,  }}>
             <Stack sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', pt: 2 }}>
-              <img src={Phone} alt='phone' style={{height:'54px', width:'54px'}}/>
+               <Image
+                    width={54}
+                    height={54} 
+                      src={Phone}
+                      alt={'Phone'}
+                      // fill
+                      // style={{ objectFit: 'contain' }}
+                    />
+              {/* <img src={Phone} alt='phone' style={{height:'54px', width:'54px'}}/> */}
             </Stack>
             <Typography
               variant="subheading3"
@@ -98,7 +115,15 @@ function SectionFout() {
         <Grid xs={12} sm={6} md={3} lg={3} sx={{display:'none'}}>
           <Stack sx={{ background: '#FAFAFA', borderRadius: 2, py: 6, my: { xs: 4, sm: 0, md: 4 }, mx: 2,  }}>
             <Stack sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', pt: 2 }}>
-              <img src={Email} />
+               <Image
+                    width={54}
+                    height={54} 
+                      src={Email}
+                      alt={'Email'}
+                      // fill
+                      // style={{ objectFit: 'contain' }}
+                    />
+              {/* <img src={Email} /> */}
             </Stack>
             <Typography
               variant="subheading2"

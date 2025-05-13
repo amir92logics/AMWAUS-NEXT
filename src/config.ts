@@ -1,5 +1,5 @@
 // next
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 
 // types
 import { DefaultConfigProps } from 'types/config';
@@ -12,12 +12,12 @@ export const DRAWER_WIDTH = 280;
 export const MINI_DRAWER_WIDTH = 90;
 export const HEADER_HEIGHT = 74;
 
-const inter = Inter({
-  subsets: ['latin'],
-  fallback: ['sans-serif'],
-  weight: ['300', '400', '500', '700'],
-  adjustFontFallback: false
-});
+// const inter = Inter({
+//   subsets: ['latin'],
+//   fallback: ['sans-serif'],
+//   weight: ['300', '400', '500', '700'],
+//   adjustFontFallback: false
+// });
 
 export enum ThemeMode {
   LIGHT = 'light',
@@ -43,7 +43,7 @@ export enum NavActionType {
 // ==============================|| THEME CONFIG ||============================== //
 
 const config: DefaultConfigProps = {
-  fontFamily: inter.style.fontFamily,
+  fontFamily: "Arial, Helvetica, sans-serif",
   i18n: 'en',
   menuOrientation: MenuOrientation.VERTICAL,
   menuCaption: true,

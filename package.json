@@ -76,7 +76,7 @@
     "@types/react-dom": "18.3.0",
     "@types/react-slick": "^0.23.13",
     "@types/react-syntax-highlighter": "15.5.13",
-    "@types/react-table": "^7.7.20",
+    "@types/react-table": "^7.7.14",
     "@typescript-eslint/eslint-plugin": "8.22.0",
     "@typescript-eslint/parser": "8.22.0",
     "eslint": "9.19.0",

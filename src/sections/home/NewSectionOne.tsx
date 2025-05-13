@@ -2,6 +2,7 @@ import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import maketplacesearch from 'assets/images/home/aisearch.png';
 import aisearch from 'assets/images/home/marketplacesearch.png';
 import mapsearch from 'assets/images/home/mapsearch.png';
+import Image from 'next/image';
 
 
 function NewSectionOne() {
@@ -43,7 +44,15 @@ function NewSectionOne() {
             }}
           >
             <Box>
-              <img src={aisearch} style={{ width: '192px', height: '192px' }} />
+                <Image
+                    width={192}
+                    height={192} 
+                      src={aisearch}
+                      alt={'aisearch'}
+                      // fill
+                      // style={{ objectFit: 'contain' }}
+                    />
+              {/* <img src={aisearch} style={{ width: '192px', height: '192px' }} /> */}
             </Box>
             <Box
               sx={{
@@ -135,7 +144,15 @@ function NewSectionOne() {
             }}
           >
             <Box>
-              <img src={mapsearch} style={{ width: '192px', height: '192px' }} />
+                <Image
+                    width={192}
+                    height={192} 
+                      src={mapsearch}
+                      alt={'mapsearch'}
+                      // fill
+                      // style={{ objectFit: 'contain' }}
+                    />
+              {/* <img src={mapsearch} style={{ width: '192px', height: '192px' }} /> */}
             </Box>
             <Box
               sx={{
@@ -196,7 +213,15 @@ function NewSectionOne() {
             }}
           >
             <Box>
-              <img src={maketplacesearch} style={{ width: '192px', height: '192px' }} />
+                <Image
+                    width={192}
+                    height={192} 
+                      src={maketplacesearch}
+                      alt={'maketplacesearch'}
+                      // fill
+                      // style={{ objectFit: 'contain' }}
+                    />
+              {/* <img src={maketplacesearch} style={{ width: '192px', height: '192px' }} /> */}
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingLeft: '30px' }}>
               <Typography variant="h4" sx={{ pb: 1, fontSize: '24px', fontWeight: '700' }}>

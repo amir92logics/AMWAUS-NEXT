@@ -8,9 +8,8 @@ import { openSnackbar } from 'store/reducers/snackbar';
 import axios from 'utils/axios';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router';
-import MetaTags from 'react-meta-tags';
 // import useGetBlogByCategory from 'hooks/useBlogCategory';
+import { useRouter } from 'next/navigation';
 
 // const category = [
 //   {
@@ -48,7 +47,8 @@ function a11yProps(index: number) {
 }
 
 function Category() {
-  const navigate = useNavigate();
+    const router = useRouter();
+
   const theme = useTheme();
   const [allblogs, setAllBlogs] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
@@ -206,7 +206,7 @@ function Category() {
                 <Card
                   sx={{ maxWidth: 450, minHeight: 380, cursor: 'pointer' }}
                   onClick={() => {
-                    navigate('/blogsDetail/' + item?.id + '/' + item?.slug);
+                    router.push('/blogsDetail/' + item?.id + '/' + item?.slug);
                     handleOpen(item?.id);
                   }}
                 >
@@ -234,21 +234,6 @@ function Category() {
 
   return (
     <>
-      <MetaTags>
-        <title>ChildrenKARE Resources</title>
-        <meta property="og:url" content="https://childrenkare.com/blogsDetail/category" />
-        <meta
-          name="description"
-          content="At ChildrenKARE, we understand the importance of providing a secure and enriching environment to children. Learn Quality Resources here."
-        />
-        <meta name="robots" content="nosnippet" />
-        <meta
-          property="og:description"
-          content={`At ChildrenKARE, we understand the importance of providing a secure and enriching environment to children. Learn Quality Resources here.`}
-        />
-        <meta property="og:title" content={`ChildrenKARE Resources`} />
-        <link rel="canonical" href="https://childrenkare.com/blogsDetail/category" />
-      </MetaTags>{' '}
       <Box sx={{ width: '100%', paddingBottom: '100px' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example">

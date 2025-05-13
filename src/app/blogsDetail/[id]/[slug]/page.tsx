@@ -7,7 +7,7 @@ import axios from 'utils/axios'; // Custom axios instance
 import NewSeoSection from 'sections/home/NewSeoSection';
 
 // 👇 SSR-friendly data fetcher
-async function getStateData(id: number) {
+async function getStateData(id: any) {
     try {
       const response = await axios.get('api/blog/get_blog_content/' + id);
       return response.data.data ;
@@ -18,7 +18,7 @@ async function getStateData(id: number) {
   }
   
   // 👇 Optional dynamic meta
-  export async function generateMetadata({ params }: { params: { id: number, slug: string } }): Promise<Metadata> {
+  export async function generateMetadata({ params }: any): Promise<Metadata> {
     const id = params.id; // ✅ This is fine in a server component
     const data = await getStateData(id);
     return {
@@ -36,7 +36,7 @@ async function getStateData(id: number) {
   }
   
   // 👇 Server Component
-   async function BlogDetail({ params }: { params: { id: number } }) {
+   async function BlogDetail({ params }: any) {
     return (
     <>
       <Header />

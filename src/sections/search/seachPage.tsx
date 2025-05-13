@@ -215,7 +215,7 @@ interface SearchProps {
     const [filteredData, setfilteredData] = useState<any>([]);
     const [centersList, setCentersList] = useState<any>([]);
     // const [cityInfo, setCityInfo] = useState<any>([]);
-    const [city, setCity] = useState<any>('');
+    // const [city, setCity] = useState<any>('');
     const [state, setState] = useState<any>('');
     const [open, setOpen] = useState(false);
     const [windowSize, setWindowSize] = useState(getWindowSize());
@@ -964,7 +964,7 @@ interface SearchProps {
               setState(_resData?.geo_location?.state_code);
               if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
                 setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-                setCity(_resData?.geo_location?.city);
+                // setCity(_resData?.geo_location?.city);
               }
               let cityurl = _resData?.geo_location?.city;
               const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';
@@ -1140,7 +1140,7 @@ interface SearchProps {
               setState(_resData?.geo_location?.state_code);
               if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
                 setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-                setCity(_resData?.geo_location?.city);
+                // setCity(_resData?.geo_location?.city);
               }
               let cityurl = _resData?.geo_location?.city;
               const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';
@@ -1307,7 +1307,7 @@ interface SearchProps {
               setState(_resData?.geo_location?.state_code);
               if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
                 setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-                setCity(_resData?.geo_location?.city);
+                // setCity(_resData?.geo_location?.city);
               }
               let cityurl = _resData?.center[0]?.city;
               const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';
@@ -1419,7 +1419,7 @@ interface SearchProps {
     //           setState(_resData?.geo_location?.state_code);
     //           if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
     //             setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-    //             setCity(_resData?.geo_location?.city);
+                // setCity(_resData?.geo_location?.city);
     //           }
     //           let cityurl = _resData?.center[0]?.city;
     //           const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';
@@ -1658,7 +1658,7 @@ interface SearchProps {
               setState(_resData?.geo_location?.state_code);
               if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
                 setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-                setCity(_resData?.geo_location?.city);
+                // setCity(_resData?.geo_location?.city);
               }
               let cityurl = _resData?.center[0]?.city;
               const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';
@@ -1850,7 +1850,7 @@ interface SearchProps {
                 setState(_resData?.geo_location?.state_code);
                 if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
                   setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-                  setCity(_resData?.geo_location?.city);
+                  // setCity(_resData?.geo_location?.city);
                 }
                 let cityurl = _resData?.center[0]?.city;
                 const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';
@@ -1989,7 +1989,7 @@ interface SearchProps {
               setState(_resData?.geo_location?.state_code);
               if (_resData?.geo_location?.city && _resData?.geo_location?.state_code) {
                 setCityName(_resData?.geo_location?.city + ', ' + _resData?.geo_location?.state_code);
-                setCity(_resData?.geo_location?.city);
+                // setCity(_resData?.geo_location?.city);
               }
               let cityurl = _resData?.center[0]?.city;
               const formattedCity = cityurl ? cityurl.replace(/\s+/g, '-').toLowerCase() : '';

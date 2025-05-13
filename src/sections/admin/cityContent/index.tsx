@@ -16,23 +16,23 @@ import {
     // MenuItem,
     // Select,
     // Autocomplete,
-    Switch
+    // Switch
   } from '@mui/material';
-  import { useEffect, useMemo, useState } from 'react';
+  import { useEffect, useState } from 'react';
   import * as Yup from 'yup';
   import { useFormik, Form, FormikProvider } from 'formik';
   // assets
   // import GoogleMaps from './GoogleMap';
   import MainCard from 'components/MainCard';
-  import { PopupTransition } from 'components/@extended/Transitions';
+  import PopupTransition from 'components/@extended/Transitions';
   
   import { dispatch } from 'store';
   import { openSnackbar } from 'store/reducers/snackbar';
-  import { CKEditor } from '@ckeditor/ckeditor5-react';
-  import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+  // import { CKEditor } from '@ckeditor/ckeditor5-react';
+  // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   import axios from 'utils/axios';
-  import ReactTable from 'pages/tables/react-table/filtringv1';
-  import AdminNav from 'components/AdminNav';
+  // import ReactTable from 'pages/tables/react-table/filtringv1';
+  // import AdminNav from 'components/AdminNav';
   
   // ==============================|| FORMS VALIDATION - ADDRESS ||============================== //
   interface Props {
@@ -41,18 +41,18 @@ import {
   function JobsComp({ data }: Props) {
     const [open, setOpen] = useState<boolean>(false);
     const [openDelete, setOpenDelete] = useState<boolean>(false);
-    const [eventType, setEventType] = useState<string>('Add');
-    const [tableData, setTableData] = useState<any>([]);
+    // const [eventType, setEventType] = useState<string>('Add');
+    // const [tableData, setTableData] = useState<any>([]);
     // const [ctyData, setCtyData] = useState<any>([]);
     // const [databyId, setDatabyId] = useState<any>(null);
     // const [openinput, setOpenInput] = useState(false);
     // const [inputValue, setInputValue] = useState('');
-    const [CitydatabyId, setCityDatabyId] = useState<any>(null);
+    // const [CitydatabyId, setCityDatabyId] = useState<any>(null);
     // const [checked, setChecked] = useState<boolean>(false);
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>, id: any) => {
-      // setChecked(event.target.checked);
-      StatusChange(event.target.checked, id);
-    };
+    // const handleChange = (event: React.ChangeEvent<HTMLInputElement>, id: any) => {
+    //   // setChecked(event.target.checked);
+    //   StatusChange(event.target.checked, id);
+    // };
     // const _data: any = [
     //   { taskName: 'Test', start_date: 'June 12, 2023 9:23 am', end_date: 'June 12, 2023 9:23 am' },
     //   { taskName: 'Twist', start_date: 'June 12, 2023 9:23 am', end_date: 'June 12, 2023 9:23 am' },
@@ -63,38 +63,38 @@ import {
       Datalist();
       // Citylist();
     }, []);
-    const CityDatabyId = (id: any) => {
-      axios
-        .get('api/city/get_city_content/' + id)
-        .then((response) => {
-          console.log(response?.data?.data);
-          if (response?.data?.status == 'fail') {
-            dispatch(
-              openSnackbar({
-                open: true,
-                message: 'Something Went Wrong',
-                variant: 'alert',
-                alert: {
-                  color: 'error'
-                },
-                close: false
-              })
-            );
-          }
-          if (response?.data?.status === 'pass') {
-            setCityDatabyId(response?.data?.data?.id);
-            // setCityDatabyId(true);
-            setFieldValue('cityname', response?.data?.data?.cityName);
-            setFieldValue('statename', response?.data?.data?.state);
-            setFieldValue('seotitle', response?.data?.data?.seo_title);
-            setFieldValue('seodescription', response?.data?.data?.seo_description);
-            setFieldValue('description', response?.data?.data?.seo_content);
-          }
-        })
-        .catch((error) => {
-          // console.log('erro uploading', jobListDatabyid);
-        });
-    };
+    // const CityDatabyId = (id: any) => {
+    //   axios
+    //     .get('api/city/get_city_content/' + id)
+    //     .then((response) => {
+    //       console.log(response?.data?.data);
+    //       if (response?.data?.status == 'fail') {
+    //         dispatch(
+    //           openSnackbar({
+    //             open: true,
+    //             message: 'Something Went Wrong',
+    //             variant: 'alert',
+    //             alert: {
+    //               color: 'error'
+    //             },
+    //             close: false
+    //           })
+    //         );
+    //       }
+    //       if (response?.data?.status === 'pass') {
+    //         setCityDatabyId(response?.data?.data?.id);
+    //         // setCityDatabyId(true);
+    //         setFieldValue('cityname', response?.data?.data?.cityName);
+    //         setFieldValue('statename', response?.data?.data?.state);
+    //         setFieldValue('seotitle', response?.data?.data?.seo_title);
+    //         setFieldValue('seodescription', response?.data?.data?.seo_description);
+    //         setFieldValue('description', response?.data?.data?.seo_content);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       // console.log('erro uploading', jobListDatabyid);
+    //     });
+    // };
     const Datalist = () => {
       axios
         .get('api/city/get_city_all')
@@ -114,7 +114,7 @@ import {
             );
           }
           if (response.data.status === 'pass') {
-            setTableData(response.data.data);
+            // setTableData(response.data.data);
           }
         })
         .catch((error) => {
@@ -148,64 +148,64 @@ import {
     //     });
     // };
   
-    const jobsColumns = useMemo(
-      () => [
-        {
-          Header: 'City',
-          accessor: 'cityName'
-        },
-        {
-          Header: 'SEO title',
-          accessor: 'seo_title'
-        },
-        {
-          Header: 'Action',
-          accessor: 'action',
-          Cell: (value: any) => {
-            console.log(typeof value?.row?.original?.status, '--------');
+    // const jobsColumns = useMemo(
+    //   () => [
+    //     {
+    //       Header: 'City',
+    //       accessor: 'cityName'
+    //     },
+    //     {
+    //       Header: 'SEO title',
+    //       accessor: 'seo_title'
+    //     },
+    //     {
+    //       Header: 'Action',
+    //       accessor: 'action',
+    //       Cell: (value: any) => {
+    //         console.log(typeof value?.row?.original?.status, '--------');
   
-            return (
-              <Stack display="flex" flexDirection="row">
-                <Switch
-                  defaultChecked={value?.row?.original?.status == 'true' ? true : false}
-                  onChange={(e) => {
-                    console.log(value?.row?.original?.status);
-                    handleChange(e, value?.row?.original?.id);
-                  }}
-                // inputProps={{ 'aria-label': 'controlled' }}
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ mr: 1 }}
-                  onClick={() => {
-                    setEventType('Edit');
-                    handleDialogopen(value?.row?.original?.id);
-                    console.log(value?.row?.original, 'ppppppppp');
-                    // CityDatabyId(value?.row?.original?.id)
-                    // handleOpen(value?.row?.id);
-                  }}
-                // disabled={isSubmitting}
-                >
-                  EDIT
-                </Button>
-                {/* <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => {
-                    handleOpenDelete(value?.row?.original?.id);
-                    // handleOpen(value?.row?.id);
-                  }}
-                >
-                  DELETE
-                </Button> */}
-              </Stack>
-            );
-          }
-        }
-      ],
-      []
-    );
+    //         return (
+    //           <Stack display="flex" flexDirection="row">
+    //             <Switch
+    //               defaultChecked={value?.row?.original?.status == 'true' ? true : false}
+    //               onChange={(e) => {
+    //                 console.log(value?.row?.original?.status);
+    //                 handleChange(e, value?.row?.original?.id);
+    //               }}
+    //             // inputProps={{ 'aria-label': 'controlled' }}
+    //             />
+    //             <Button
+    //               variant="contained"
+    //               color="primary"
+    //               sx={{ mr: 1 }}
+    //               onClick={() => {
+    //                 setEventType('Edit');
+    //                 handleDialogopen(value?.row?.original?.id);
+    //                 console.log(value?.row?.original, 'ppppppppp');
+    //                 // CityDatabyId(value?.row?.original?.id)
+    //                 // handleOpen(value?.row?.id);
+    //               }}
+    //             // disabled={isSubmitting}
+    //             >
+    //               EDIT
+    //             </Button>
+    //             {/* <Button
+    //               variant="contained"
+    //               color="error"
+    //               onClick={() => {
+    //                 handleOpenDelete(value?.row?.original?.id);
+    //                 // handleOpen(value?.row?.id);
+    //               }}
+    //             >
+    //               DELETE
+    //             </Button> */}
+    //           </Stack>
+    //         );
+    //       }
+    //     }
+    //   ],
+    //   []
+    // );
     const handleDialog = () => {
       // setCityDatabyId(false);
       setOpen(false);
@@ -214,12 +214,12 @@ import {
       // setFieldValue('seodescription', '');
       // setFieldValue('description', '');
     };
-    const handleDialogopen = (id: any) => {
-      setOpen(true);
-      if (id != 'Add') {
-        CityDatabyId(id);
-      }
-    };
+    // const handleDialogopen = (id: any) => {
+    //   setOpen(true);
+    //   if (id != 'Add') {
+    //     CityDatabyId(id);
+    //   }
+    // };
     const handleDeleteDialog = () => {
       setOpenDelete(false);
     };
@@ -296,134 +296,134 @@ import {
     //     });
     // };
   
-    const StoreDate = (setSubmitting: any) => {
-      const data = new FormData();
+    // const StoreDate = (setSubmitting: any) => {
+    //   const data = new FormData();
   
-      // data.append('city_name', values.cityname);
-      data.append('seo_title', values.seotitle);
-      data.append('seo_description', values.seodescription);
-      data.append('seo_content', values.description);
-      data.append('created_by', '2');
-      // setIsLoading(true);
+    //   // data.append('city_name', values.cityname);
+    //   data.append('seo_title', values.seotitle);
+    //   data.append('seo_description', values.seodescription);
+    //   data.append('seo_content', values.description);
+    //   data.append('created_by', '2');
+    //   // setIsLoading(true);
   
-      axios({
-        method: 'post',
-        url: 'api/city/update_city_content/' + CitydatabyId,
-        data: data,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-        .then((response) => {
-          // setIsLoading(false);
+    //   axios({
+    //     method: 'post',
+    //     url: 'api/city/update_city_content/' + CitydatabyId,
+    //     data: data,
+    //     headers: { 'Content-Type': 'multipart/form-data' }
+    //   })
+    //     .then((response) => {
+    //       // setIsLoading(false);
   
-          console.log(response.data);
-          if (response.data.status == 'fail') {
-            dispatch(
-              openSnackbar({
-                open: true,
-                message: 'Something Went Wrong',
-                variant: 'alert',
-                alert: {
-                  color: 'error'
-                },
-                close: false
-              })
-            );
-          }
-          if (response.data.status == 'pass') {
-            setSubmitting(true);
-            setOpen(false);
-            Datalist();
+    //       console.log(response.data);
+    //       if (response.data.status == 'fail') {
+    //         dispatch(
+    //           openSnackbar({
+    //             open: true,
+    //             message: 'Something Went Wrong',
+    //             variant: 'alert',
+    //             alert: {
+    //               color: 'error'
+    //             },
+    //             close: false
+    //           })
+    //         );
+    //       }
+    //       if (response.data.status == 'pass') {
+    //         setSubmitting(true);
+    //         setOpen(false);
+    //         Datalist();
   
-            // {eventType === 'Edit' ? 'Edit' : 'Add'}
+    //         // {eventType === 'Edit' ? 'Edit' : 'Add'}
   
-            dispatch(
-              openSnackbar({
-                open: true,
-                message: 'Data Posted Successfuly',
-                variant: 'alert',
-                alert: {
-                  color: 'success'
-                },
-                close: false
-              })
-            );
+    //         dispatch(
+    //           openSnackbar({
+    //             open: true,
+    //             message: 'Data Posted Successfuly',
+    //             variant: 'alert',
+    //             alert: {
+    //               color: 'success'
+    //             },
+    //             close: false
+    //           })
+    //         );
   
-            // setTimeout(() => {
-            //   navigate('/joblist');
-            // }, 2000);
-          }
-        })
-        .catch((error) => {
-          // setIsLoading(false);
+    //         // setTimeout(() => {
+    //         //   navigate('/joblist');
+    //         // }, 2000);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       // setIsLoading(false);
   
-          console.log('erro uploading', error.message);
-        });
-    };
-    const StatusChange = (status: any, id: any) => {
-      const data = new FormData();
+    //       console.log('erro uploading', error.message);
+    //     });
+    // };
+    // const StatusChange = (status: any, id: any) => {
+    //   const data = new FormData();
   
-      // data.append('city_name', values.cityname);
-      data.append('status', status);
+    //   // data.append('city_name', values.cityname);
+    //   data.append('status', status);
   
-      // setIsLoading(true);
+    //   // setIsLoading(true);
   
-      axios({
-        method: 'post',
-        url: 'api/city/update_city_status/' + id,
-        data: data,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-        .then((response) => {
-          // setIsLoading(false);
+    //   axios({
+    //     method: 'post',
+    //     url: 'api/city/update_city_status/' + id,
+    //     data: data,
+    //     headers: { 'Content-Type': 'multipart/form-data' }
+    //   })
+    //     .then((response) => {
+    //       // setIsLoading(false);
   
-          console.log(response.data);
-          if (response.data.status == 'fail') {
-            dispatch(
-              openSnackbar({
-                open: true,
-                message: 'Something Went Wrong',
-                variant: 'alert',
-                alert: {
-                  color: 'error'
-                },
-                close: false
-              })
-            );
-          }
-          if (response.data.status == 'pass') {
-            Datalist();
+    //       console.log(response.data);
+    //       if (response.data.status == 'fail') {
+    //         dispatch(
+    //           openSnackbar({
+    //             open: true,
+    //             message: 'Something Went Wrong',
+    //             variant: 'alert',
+    //             alert: {
+    //               color: 'error'
+    //             },
+    //             close: false
+    //           })
+    //         );
+    //       }
+    //       if (response.data.status == 'pass') {
+    //         Datalist();
   
-            // {eventType === 'Edit' ? 'Edit' : 'Add'}
+    //         // {eventType === 'Edit' ? 'Edit' : 'Add'}
   
-            dispatch(
-              openSnackbar({
-                open: true,
-                message: status ? "Status Changed to Open" : "Status Changed to Close",
-                variant: 'alert',
-                alert: {
-                  color: 'success'
-                },
-                close: false
-              })
-            );
+    //         dispatch(
+    //           openSnackbar({
+    //             open: true,
+    //             message: status ? "Status Changed to Open" : "Status Changed to Close",
+    //             variant: 'alert',
+    //             alert: {
+    //               color: 'success'
+    //             },
+    //             close: false
+    //           })
+    //         );
   
-            // setTimeout(() => {
-            //   navigate('/joblist');
-            // }, 2000);
-          }
-        })
-        .catch((error) => {
-          // setIsLoading(false);
+    //         // setTimeout(() => {
+    //         //   navigate('/joblist');
+    //         // }, 2000);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       // setIsLoading(false);
   
-          console.log('erro uploading', error.message);
-        });
-    };
+    //       console.log('erro uploading', error.message);
+    //     });
+    // };
     const formik = useFormik({
       initialValues: getInitialValues(),
       validationSchema: EventSchema,
       onSubmit: (values, { setSubmitting }) => {
         // console.log(values, 'cales');
-        StoreDate(setSubmitting);
+        // StoreDate(setSubmitting);
         // alert("ok")
         // return
   
@@ -471,7 +471,7 @@ import {
   
     return (
       <>
-      <AdminNav />
+      {/* <AdminNav /> */}
         <MainCard
          
         // secondary={
@@ -487,7 +487,7 @@ import {
         //   </Button>
         // }
         >
-          <ReactTable columns={jobsColumns} data={tableData} tableType={'filterable'} />
+          {/* <ReactTable columns={jobsColumns} data={tableData} tableType={'filterable'} /> */}
           <Dialog
             maxWidth="md"
             TransitionComponent={PopupTransition}
@@ -500,7 +500,7 @@ import {
           >
             <FormikProvider value={formik}>
               <Form noValidate onSubmit={handleSubmit}>
-                <DialogTitle>{eventType === 'Edit' ? 'EDIT' : 'ADD NEW'}</DialogTitle>
+                {/* <DialogTitle>{eventType === 'Edit' ? 'EDIT' : 'ADD NEW'}</DialogTitle> */}
                 <Divider />
                 <DialogContent sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
@@ -600,7 +600,7 @@ import {
                       <Stack spacing={1.25}>
                         <InputLabel htmlFor="description">SEO Content</InputLabel>
                         {/* <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}> */}
-                        <CKEditor
+                        {/* <CKEditor
                           editor={ClassicEditor}
                           data={values.description}
                           onReady={(editor) => {
@@ -619,7 +619,7 @@ import {
                         // onFocus={(event, editor) => {
                         //   console.log('Focus.', editor);
                         // }}
-                        />
+                        /> */}
                         {/* <TextField
                           fullWidth
                           InputProps={{
@@ -661,7 +661,7 @@ import {
                           Cancel
                         </Button>
                         <Button type="submit" variant="contained" >
-                          {eventType === 'Edit' ? 'Edit' : 'Add'}
+                          {/* {eventType === 'Edit' ? 'Edit' : 'Add'} */}
                         </Button>
                       </Stack>
                     </Grid>
