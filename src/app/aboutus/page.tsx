@@ -24,7 +24,7 @@ function AboutUs() {
       <AboutUsComp />
       <NewSeoSection />
 
-<Footer />
+      <Footer />
     </>
   );
 }

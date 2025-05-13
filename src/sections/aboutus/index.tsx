@@ -5,7 +5,7 @@ import AboutUsSectionOne from 'sections/aboutus/AboutUsSectionOne';
 import AboutUsSectionTwo from 'sections/aboutus/AboutUsSectionTwo';
 import AboutUsSectionThree from 'sections/aboutus/AboutUsSectionThree';
 import AboutUsSectionFour from 'sections/aboutus/AboutUsSectionFour';
-import NewSeoSection from 'sections/home/NewSeoSection';
+// import NewSeoSection from 'sections/home/NewSeoSection';
 import { useTheme } from '@mui/material/styles';
 const bannerimage = '/assets/images/compresspics/about.webp';
 const aboutusmobilebg = '/assets/images/compresspics/aboutusmobilebg.webp';
@@ -76,9 +76,9 @@ function AboutUs() {
                 </Grid>
               </Container>
             </Grid>
-            <Grid xs={12} sm={12} md={12} lg={12} sx={{ px: 0, mt: 0, background: '#fff' }}>
+            {/* <Grid xs={12} sm={12} md={12} lg={12} sx={{ px: 0, mt: 0, background: '#fff' }}>
               <NewSeoSection />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
     </Stack>

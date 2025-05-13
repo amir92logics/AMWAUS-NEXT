@@ -6,7 +6,7 @@ import { Box, Container, Grid, Rating, Stack, Typography } from '@mui/material';
 const parentdash = '/assets/images/home/pd.png';
 const parentdash1 = '/assets/images/home/pd1.png';
 const shakehand = '/assets/images/home/shakehands.png';
-// import './style1.css'; // Import the CSS
+import './style1.css'; // Import the CSS
 import Image from 'next/image';
 
 const ParentDashboardForHome: React.FC = () => {
@@ -35,7 +35,7 @@ const ParentDashboardForHome: React.FC = () => {
   }, []);
 
   return (
-    <Grid container sx={{  py: { lg: '84px', xs: '30px' }, position: 'relative', background: '#ccc' }} ref={sectionRef}>
+    <Grid container sx={{ py: { lg: '84px', xs: '30px' }, position: 'relative', background: '#ccc' }} ref={sectionRef}>
       <Container>
         <Grid container>
           <Grid item xs={12}>
@@ -129,48 +129,48 @@ const ParentDashboardForHome: React.FC = () => {
               </Box>
             </Stack>
             <Stack sx={{ mt: 6, px: 3, mb: 2 }}>
-  <div
-    style={{
-      width: '100%',
-      height: '300px', // set a fixed or responsive height
-      backgroundImage: `url(${parentdash})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      borderRadius: '16px', // optional
-    }}
-    aria-label="parentdash"
-    role="img"
-  />
-</Stack>
+              <div
+                style={{
+                  width: '100%',
+                  height: '300px', // set a fixed or responsive height
+                  backgroundImage: `url(${parentdash})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderRadius: '16px', // optional
+                }}
+                aria-label="parentdash"
+                role="img"
+              />
+            </Stack>
           </Grid>
 
           <Grid item>
             <Stack className={`centerPart ${isAnimated ? 'centerGrow1 centerVisible1' : 'centerShrink1 centerVisible1'}`}>
               <Stack sx={{ alignItems: 'center' }}>
-                <Typography variant="subheading3" sx={{fontSize:{md:'20px',xs:'18px'}}}>We Negotiate for you</Typography>
+                <Typography variant="subheading3" sx={{ fontSize: { md: '20px', xs: '18px' } }}>We Negotiate for you</Typography>
               </Stack>
               <Stack sx={{ alignItems: 'center' }}>
                 <Rating name="simple-controlled" value={5} />
               </Stack>
             </Stack>
             <Stack
-  sx={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative', // Important for Image with fill
-    width: '100%',
-    height: '300px', // or any height you need
-  }}
-  className={`center ${isAnimated ? 'centerGrow centerVisible' : 'centerShrink centerVisible'}`}
->
-  <Image
-    src={shakehand}
-    alt="shakehand"
-    fill
-    style={{ objectFit: 'contain', zIndex: 999 }}
-  />
-</Stack>
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative', // Important for Image with fill
+                width: '100%',
+                height: '300px', // or any height you need
+              }}
+              className={`center ${isAnimated ? 'centerGrow centerVisible' : 'centerShrink centerVisible'}`}
+            >
+              <Image
+                src={shakehand}
+                alt="shakehand"
+                fill
+                style={{ objectFit: 'contain', zIndex: 999 }}
+              />
+            </Stack>
           </Grid>
 
           <Grid
@@ -194,7 +194,7 @@ const ParentDashboardForHome: React.FC = () => {
               </Typography>
             </Stack>
             <Stack sx={{ mt: '53px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Typography variant="bodytext" sx={{ width: '400px', textAlign: 'center',px:2 }}>
+              <Typography variant="bodytext" sx={{ width: '400px', textAlign: 'center', px: 2 }}>
                 Through this dashboard, you can find a childcare center for your kids with this amazing feature.
               </Typography>
             </Stack>
@@ -237,20 +237,20 @@ const ParentDashboardForHome: React.FC = () => {
                 </Typography>
               </Box>
             </Stack>
-            <Stack sx={{ mt: 6, px: 3, mb: 2, position: 'relative',}}>
-            <div
-    style={{
-      width: '100%',
-      height: '300px', // set a fixed or responsive height
-      backgroundImage: `url(${parentdash1})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      borderRadius: '16px', // optional
-    }}
-    aria-label="parentdash"
-    role="img"
-  />
-</Stack>
+            <Stack sx={{ mt: 6, px: 3, mb: 2, position: 'relative', }}>
+              <div
+                style={{
+                  width: '100%',
+                  height: '300px', // set a fixed or responsive height
+                  backgroundImage: `url(${parentdash1})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderRadius: '16px', // optional
+                }}
+                aria-label="parentdash"
+                role="img"
+              />
+            </Stack>
           </Grid>
         </Grid>
       </Grid>
