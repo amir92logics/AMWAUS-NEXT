@@ -7,7 +7,7 @@ import { dispatch, type RootState } from 'store';
 import { useRouter } from 'next/navigation';
 
 import { setIsParams } from 'store/reducers/zipcode';
-import { setShowMarketPlaceHeader } from 'store/reducers/zipcode';
+// import { setShowMarketPlaceHeader } from 'store/reducers/zipcode';
 
 const NearByZipcode = () => {
   const [nearBy, setNearBy] = useState([]);
@@ -35,7 +35,7 @@ const NearByZipcode = () => {
   };
   const handleClick = (data: any) => {
     // localStorage.setItem('params-search', 'true');
-    dispatch(setShowMarketPlaceHeader(true))
+    // dispatch(setShowMarketPlaceHeader(true))
     dispatch(setIsParams(true));
 
     const abr = data?.state_code.toLowerCase();

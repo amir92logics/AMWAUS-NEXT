@@ -11,7 +11,8 @@ import SecTwo from './SecTwo';
 function PrivacyPolicy() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  return (<>
+  return (    <Stack sx={{ overflow: 'hidden', background: '#fff' }}>
+
       <Stack
         sx={{
           backgroundImage: `url(${matches ? bannerimage : aboutusmobilebg})`,
@@ -50,7 +51,8 @@ function PrivacyPolicy() {
           <SecTwo />
         </Stack>
       </Container>
-      </>
+             </Stack>
+
   );
 }
 

@@ -1,4 +1,3 @@
-import { Stack } from '@mui/material';
 import Header from 'components/header';
 import NewSeoSection from 'sections/home/NewSeoSection';
 import Footer from 'components/footer';
@@ -20,12 +19,12 @@ export const metadata: Metadata = {
 
 function PrivacyPolicy() {
   return (
-    <Stack sx={{ overflow: 'hidden', background: '#fff' }}>
+    <>
       <Header />
      <PrivacyPolicyPage />
      <NewSeoSection />
       <Footer />
-    </Stack>
+    </>
   );
 }
 

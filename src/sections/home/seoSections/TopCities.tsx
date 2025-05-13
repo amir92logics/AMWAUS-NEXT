@@ -3,7 +3,7 @@ import { Grid, Stack, Typography } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
 import { dispatch } from 'store';
 import { setIsParams } from 'store/reducers/zipcode';
-import { setShowMarketPlaceHeader } from 'store/reducers/zipcode';
+// import { setShowMarketPlaceHeader } from 'store/reducers/zipcode';
 import { useRouter } from 'next/navigation';
 
 const TopCities = ({ topcities }: any) => {
@@ -13,7 +13,7 @@ const TopCities = ({ topcities }: any) => {
   const handleClick = (citydata: any) => {
     // localStorage.setItem('params-search', 'true');
     dispatch(setIsParams(true));
-    dispatch(setShowMarketPlaceHeader(true))
+    // dispatch(setShowMarketPlaceHeader(true))
     const abr = citydata?.state.toLowerCase();
     const daycares = citydata?.city?.replace(/\s+/g, '-').toLowerCase();
     router.push(`/${abr}/daycares-in-${daycares}`);

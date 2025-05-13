@@ -9,7 +9,7 @@ import axios from 'utils/axios'; // Custom axios instance
 
   interface PageProps {
   params: {
-    zipcode: any;
+    zipcode: string;
     abr: string;
     daycares: string;
   };
@@ -64,10 +64,10 @@ async function getAIData(_cityName: any, _state: any, _category?: any) {
 
   // 👇 Optional dynamic meta
   export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-      //  const { abr, daycares, zipcode } = await params;
-        const zipcode = await params.zipcode; // ✅ This is fine in a server component
-    const daycares = await params.daycares; // ✅ This is fine in a server component
-    const abr = await params.abr; // ✅ This is fine in a server component
+       const { abr, daycares, zipcode } = params;
+    //     const zipcode = await params.zipcode; // ✅ This is fine in a server component
+    // const daycares = await params.daycares; // ✅ This is fine in a server component
+    // const abr = await params.abr; // ✅ This is fine in a server component
     const cityName = daycares.replace('daycares-in-', '').replace(/\-+/g, ' ');
   let seoTitle = '';
   let seoDescription = '';

@@ -11,7 +11,8 @@ function TermsAndCondition() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   return (
-    <>
+        <Stack sx={{ overflow: 'hidden', background: '#fff' }}>
+
       
       <Stack
         sx={{
@@ -51,7 +52,7 @@ function TermsAndCondition() {
           <SecTwo />
         </Stack>
       </Container>
-    </>
+        </Stack>
   );
 }
 

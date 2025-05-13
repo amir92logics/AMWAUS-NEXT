@@ -1,6 +1,5 @@
 // import React from 'react'
 
-import { Stack} from '@mui/material';
 import TermsConditionComp from 'sections/termsandcondition';
 import Header from 'components/header';
 import NewSeoSection from 'sections/home/NewSeoSection';
@@ -22,12 +21,12 @@ export const metadata: Metadata = {
 
 function TermsAndCondition() {
   return (
-    <Stack sx={{ overflow: 'hidden', background: '#fff' }}>
+    <>
       <Header />
       <TermsConditionComp />
       <NewSeoSection />
       <Footer />
-    </Stack>
+    </>
   );
 }
 
