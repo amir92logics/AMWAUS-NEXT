@@ -1,30 +1,36 @@
-import { TextField, Typography, Box, Button, Select, Grid, InputLabel, FormControl, Input, Modal,
-  //  Switch 
-  } from '@mui/material';
+import {
+  TextField, Typography, Box, Button, Select, Grid, InputLabel, FormControl, Input, Modal,
+  Switch
+} from '@mui/material';
 import { MenuItem } from '@mui/material';
 import { Stack } from '@mui/material';
-import { useEffect, useState
-  // , useMemo 
+import {
+  useEffect, useState
+  , useMemo
 } from 'react';
 import axios from 'utils/axios';
 import { dispatch } from 'store';
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import type { Editor } from '@ckeditor/ckeditor5-core';
 // import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 // import '@ckeditor/ckeditor5-ckfinder/theme/css/ckfinder.css';
 // import { DocumentEditor } from './tinyEditor';
 import { openSnackbar } from 'store/reducers/snackbar';
-// import ReactTable from 'components/tables/react-table/filtering';
+import ReactTable from 'components/tables/react-table/simpleTable';
 // import { useNavigate } from 'react-router';
-import '../../../styles.css';
+import '../../../app/styles.css';
 import AdminNav from 'components/AdminNav';
 const xcicle = '/assets/images/home/x-circle.png';
-// import { toggleBtnStyles } from 'utils/globelStyles';
+import { toggleBtnStyles } from 'utils/globelStyles';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
 function BlogForm() {
-  const [open, setOpen] = useState<boolean>(false);  
+  const router = useRouter();
+
+  const [open, setOpen] = useState<boolean>(false);
   // const navigate = useNavigate();
   const [title, settitle] = useState<any>(null);
   const [shortdescription, setShortDescription] = useState<any>(null);
@@ -41,7 +47,7 @@ function BlogForm() {
   console.log('🚀 ~ file: BlogForm.tsx:32 ~ BlogForm ~ allblogs:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', allblogs);
   const [categories, setCategories] = useState<any>([]);
   const [blogdetail
-    // , setblogdetail
+    , setblogdetail
   ] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(true);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
@@ -56,6 +62,14 @@ function BlogForm() {
   // const [imageValidation, setImageValidation] = useState<any>(false);
   const [contentValidation, setcontentValidation] = useState<any>(false);
   // const editorRef = useRef<any>(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user') || 'null');;
+    if (!storedUser) {
+      router.push('/login'); // Replace with your target route
+    }
+  }, []);
+
   const BlogCategory = () => {
     axios
       .get('api/blogCategory/get_blog_category')
@@ -452,163 +466,166 @@ function BlogForm() {
         // console.log('erro uploading', jobListDatabyid);
       });
   };
-  // const BlogbyId = (id: any) => {
-  //   axios
-  //     .get('api/blog/get_blog_content/' + id)
-  //     .then((response) => {
-  //       if (response.data.status === 'fail') {
-  //         dispatch(
-  //           openSnackbar({
-  //             open: true,
-  //             message: 'Something Went Wrong',
-  //             variant: 'alert',
-  //             alert: {
-  //               color: 'error'
-  //             },
-  //             close: false
-  //           })
-  //         );
-  //       }
-  //       if (response.data.status === 'pass') {
-  //         setblogdetail(response?.data?.data);
-  //         settitle(response?.data?.data?.title);
-  //         setShortDescription(response?.data?.data?.short_description);
-  //         setMetaTitle(response?.data?.data?.meta_title);
-  //         setMetaDescription(response?.data?.data?.meta_description);
-  //         setSlug(response?.data?.data?.slug);
-  //         setCategoryName(response?.data?.data?.category_name);
-  //         setcontent(response?.data?.data?.content);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('erro uploading', error.message);
-  //     });
-  // };
+  const BlogbyId = (id: any) => {
+    axios
+      .get('api/blog/get_blog_content/' + id)
+      .then((response) => {
+        if (response.data.status === 'fail') {
+          dispatch(
+            openSnackbar({
+              open: true,
+              message: 'Something Went Wrong',
+              variant: 'alert',
+              alert: {
+                color: 'error'
+              },
+              close: false
+            })
+          );
+        }
+        if (response.data.status === 'pass') {
+          setblogdetail(response?.data?.data);
+          settitle(response?.data?.data?.title);
+          setShortDescription(response?.data?.data?.short_description);
+          setMetaTitle(response?.data?.data?.meta_title);
+          setMetaDescription(response?.data?.data?.meta_description);
+          setSlug(response?.data?.data?.slug);
+          setCategoryName(response?.data?.data?.category_name);
+          setcontent(response?.data?.data?.content);
+        }
+      })
+      .catch((error) => {
+        console.log('erro uploading', error.message);
+      });
+  };
   const handleClose = () => {
     setOpen(false);
     setOpenEdit(false);
     setIsSubmitting(true);
     ResetForm();
   };
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>, id: any) => {
-  //   // setChecked(event.target.checked);
-  //   StatusChange(event.target.checked, id);
-  // };
-  // const StatusChange = (status: any, id: any) => {
-  //   const data = new FormData();
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, id: any) => {
+    // setChecked(event.target.checked);
+    StatusChange(event.target.checked, id);
+  };
+  const StatusChange = (status: any, id: any) => {
+    const data = new FormData();
 
-  //   // data.append('city_name', values.cityname);
-  //   data.append('status', status);
+    // data.append('city_name', values.cityname);
+    data.append('status', status);
 
-  //   // setIsLoading(true);
+    // setIsLoading(true);
 
-  //   axios({
-  //     method: 'post',
-  //     url: 'api/blog/blog_status/' + id,
-  //     data: data,
-  //     headers: { 'Content-Type': 'multipart/form-data' }
-  //   })
-  //     .then((response) => {
-  //       if (response.data.status === 'fail') {
-  //         dispatch(
-  //           openSnackbar({
-  //             open: true,
-  //             message: 'Something Went Wrong',
-  //             variant: 'alert',
-  //             alert: {
-  //               color: 'error'
-  //             },
-  //             close: false
-  //           })
-  //         );
-  //       }
-  //       if (response.data.status === 'pass') {
-  //         Bloglist();
+    axios({
+      method: 'post',
+      url: 'api/blog/blog_status/' + id,
+      data: data,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+      .then((response) => {
+        if (response.data.status === 'fail') {
+          dispatch(
+            openSnackbar({
+              open: true,
+              message: 'Something Went Wrong',
+              variant: 'alert',
+              alert: {
+                color: 'error'
+              },
+              close: false
+            })
+          );
+        }
+        if (response.data.status === 'pass') {
+          Bloglist();
 
-  //         // {eventType === 'Edit' ? 'Edit' : 'Add'}
+          // {eventType === 'Edit' ? 'Edit' : 'Add'}
 
-  //         dispatch(
-  //           openSnackbar({
-  //             open: true,
-  //             message: status ? 'Status Changed to Open' : 'Status Changed to Close',
-  //             variant: 'alert',
-  //             alert: {
-  //               color: 'success'
-  //             },
-  //             close: false
-  //           })
-  //         );
+          dispatch(
+            openSnackbar({
+              open: true,
+              message: status ? 'Status Changed to Open' : 'Status Changed to Close',
+              variant: 'alert',
+              alert: {
+                color: 'success'
+              },
+              close: false
+            })
+          );
 
-  //         // setTimeout(() => {
-  //         //   navigate('/joblist');
-  //         // }, 2000);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       // setIsLoading(false);
+          // setTimeout(() => {
+          //   navigate('/joblist');
+          // }, 2000);
+        }
+      })
+      .catch((error) => {
+        // setIsLoading(false);
 
-  //       console.log('erro uploading', error.message);
-  //     });
-  // };
-  // const jobsColumns = useMemo(
-  //   () => [
-  //     {
-  //       Header: 'Blog title',
-  //       accessor: 'title'
-  //     },
-  //     {
-  //       Header: 'description',
-  //       accessor: 'short_description'
-  //     },
-  //     {
-  //       Header: 'Action',
-  //       accessor: 'action',
-  //       Cell: (value: any) => {
-  //         return (
-  //           <Stack display="flex" flexDirection="row">
-  //             <Switch
-  //              sx={toggleBtnStyles}
-  //               defaultChecked={value?.row?.original?.status === 'true' ? true : false}
-  //               onChange={(e) => {
-  //                 console.log(value?.row?.original?.status);
-  //                 handleChange(e, value?.row?.original?.id);
-  //               }}
-  //               // inputProps={{ 'aria-label': 'controlled' }}
-  //             />
-  //             <Button
-  //               variant="contained"
-  //               color="primary"
-  //               sx={{ mr: 1, borderRadius: '20px',  background: '#000', '&:hover': {
-  //                 background: '#000'}  }}
-  //               onClick={() => {
-  //                 // handleDialogopen(value?.row?.original?.id);
-  //                 BlogbyId(value?.row?.original?.id);
-  //                 setOpenEdit(true);
-  //                 setOpen(true);
-  //                 // handleOpen(value?.row?.id);
-  //               }}
-  //               // disabled={isSubmitting}
-  //             >
-  //               EDIT
-  //             </Button>
+        console.log('erro uploading', error.message);
+      });
+  };
+  const jobsColumns = useMemo(
+    () => [
+      {
+        Header: 'Blog title',
+        accessor: 'title'
+      },
+      {
+        Header: 'description',
+        accessor: 'short_description'
+      },
+      {
+        Header: 'Action',
+        accessor: 'action',
+        Cell: (value: any) => {
+          return (
+            <Stack display="flex" flexDirection="row">
+              <Switch
+                sx={toggleBtnStyles}
+                defaultChecked={value?.row?.original?.status === 'true' ? true : false}
+                onChange={(e) => {
+                  console.log(value?.row?.original?.status);
+                  handleChange(e, value?.row?.original?.id);
+                }}
+              // inputProps={{ 'aria-label': 'controlled' }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  mr: 1, borderRadius: '20px', background: '#000', '&:hover': {
+                    background: '#000'
+                  }
+                }}
+                onClick={() => {
+                  // handleDialogopen(value?.row?.original?.id);
+                  BlogbyId(value?.row?.original?.id);
+                  setOpenEdit(true);
+                  setOpen(true);
+                  // handleOpen(value?.row?.id);
+                }}
+              // disabled={isSubmitting}
+              >
+                EDIT
+              </Button>
 
-  //             {/* <Button
-  //               variant="contained"
-  //               color="error"
-  //               onClick={() => {
-  //                 handleOpenDelete(value?.row?.original?.id);
-  //                 // handleOpen(value?.row?.id);
-  //               }}
-  //             >
-  //               DELETE
-  //             </Button> */}
-  //           </Stack>
-  //         );
-  //       }
-  //     }
-  //   ],
-  //   []
-  // );
+              {/* <Button
+                variant="contained"
+                color="error"
+                onClick={() => {
+                  handleOpenDelete(value?.row?.original?.id);
+                  // handleOpen(value?.row?.id);
+                }}
+              >
+                DELETE
+              </Button> */}
+            </Stack>
+          );
+        }
+      }
+    ],
+    []
+  );
   const style = {
     maxHeight: '75vh', // You can adjust the maximum height as needed
     overflowY: 'auto',
@@ -623,10 +640,10 @@ function BlogForm() {
     p: 4
   };
 
-  // const editorConfiguration = {         
-  //   toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
-  //     'tableColumn', 'tableRow', 'mergeTableCells', 'mediaEmbed', '|', 'undo', 'redo', 'sticky ']
-  // }
+  const editorConfiguration = {
+    toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+      'tableColumn', 'tableRow', 'mergeTableCells', 'mediaEmbed', '|', 'undo', 'redo', 'sticky ']
+  }
 
   return (
     <>
@@ -636,12 +653,15 @@ function BlogForm() {
           <Button
             variant="contained"
             color="primary"
-            sx={{ mr: 1, borderRadius: '20px',  background: '#000', '&:hover': {
-              background: '#000'}  }}
+            sx={{
+              mr: 1, borderRadius: '20px', background: '#000', '&:hover': {
+                background: '#000'
+              }
+            }}
             onClick={() => {
               setOpen(true);
             }}
-            // disabled={isSubmitting}
+          // disabled={isSubmitting}
           >
             Add Blog
           </Button>
@@ -662,23 +682,23 @@ function BlogForm() {
           <Typography variant="h3" sx={{ py: 3 }}>
             Blog List
           </Typography>
-          {/* <ReactTable columns={jobsColumns} data={allblogs} tableType={''} /> */}
+          <ReactTable columns={jobsColumns} data={allblogs} />
         </Stack>
       </Stack>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Box
-                      onClick={handleClose}
-                      sx={{ position: 'absolute', top: 10, right: '25px', cursor: 'pointer', zIndex: 9 }}
-                    >
-                       <Image
-                                    height={20}
-                                    width={20}
-                                    src={xcicle}
-                                    alt={'xcicle'}
-                                  />
-                      {/* <img src={xcicle} height={'20px'} alt="xcicle" /> */}
-                    </Box>
+            onClick={handleClose}
+            sx={{ position: 'absolute', top: 10, right: '25px', cursor: 'pointer', zIndex: 9 }}
+          >
+            <Image
+              height={20}
+              width={20}
+              src={xcicle}
+              alt={'xcicle'}
+            />
+            {/* <img src={xcicle} height={'20px'} alt="xcicle" /> */}
+          </Box>
           <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#fff', py: 4 }}>
             <Typography variant="h2" sx={{ py: 3 }}>
               Blog Form
@@ -686,8 +706,8 @@ function BlogForm() {
             <Grid container>
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                                      <InputLabel htmlFor="Blog Title">Blog Title</InputLabel>
-                
+                  <InputLabel htmlFor="Blog Title">Blog Title</InputLabel>
+
                   <TextField
                     placeholder="Blog Title"
                     sx={{ width: '100%', background: 'white', outline: 'none', border: 'none', borderRadius: 1 }}
@@ -708,7 +728,7 @@ function BlogForm() {
               </Grid>
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack direction={'column'} sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                <InputLabel htmlFor="Short Description">Short Description</InputLabel>
+                  <InputLabel htmlFor="Short Description">Short Description</InputLabel>
 
                   <TextField
                     placeholder="Short Description"
@@ -731,7 +751,7 @@ function BlogForm() {
               </Grid>
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack direction={'column'} sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                <InputLabel htmlFor="Meta Title">Meta Title</InputLabel>
+                  <InputLabel htmlFor="Meta Title">Meta Title</InputLabel>
 
                   <TextField
                     placeholder="Meta Title"
@@ -754,11 +774,11 @@ function BlogForm() {
               {!openEdit && (
                 <Grid item sm={12} xs={12} md={6} lg={6}>
                   <Stack sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                  <InputLabel htmlFor="Author">Author</InputLabel>
+                    <InputLabel htmlFor="Author">Author</InputLabel>
 
 
                     <FormControl fullWidth>
-                      
+
                       <Select
                         sx={{ width: '100%', background: 'white', outline: 'none', border: 'none', borderRadius: 1 }}
                         labelId="demo-simple-select-label"
@@ -783,7 +803,7 @@ function BlogForm() {
               )}
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                <InputLabel htmlFor="Select Category">Select Category</InputLabel>
+                  <InputLabel htmlFor="Select Category">Select Category</InputLabel>
 
                   <FormControl fullWidth>
                     <Select
@@ -810,7 +830,7 @@ function BlogForm() {
               </Grid>
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack direction={'column'} sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                <InputLabel htmlFor="Meta Description">Meta Description</InputLabel>
+                  <InputLabel htmlFor="Meta Description">Meta Description</InputLabel>
 
                   <TextField
                     placeholder="Meta Description"
@@ -832,7 +852,7 @@ function BlogForm() {
               </Grid>
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack direction={'column'} sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                <InputLabel htmlFor="Enter Slug">Enter Slug</InputLabel>
+                  <InputLabel htmlFor="Enter Slug">Enter Slug</InputLabel>
 
                   <TextField
                     placeholder="Slug"
@@ -855,7 +875,7 @@ function BlogForm() {
               {/* {openEdit || open && ( */}
               <Grid item sm={12} xs={12} md={6} lg={6}>
                 <Stack direction={'column'} sx={{ mx: 2, mt: { md: 4, xs: 2 } }}>
-                <InputLabel htmlFor=" Select Image"> Select Image</InputLabel>
+                  <InputLabel htmlFor=" Select Image"> Select Image</InputLabel>
 
                   <label htmlFor="contained-button-file" />
                   <Input onChange={handleFileChange} id="contained-button-file" type="file" />
@@ -878,8 +898,8 @@ function BlogForm() {
                   <InputLabel htmlFor="description">SEO Content</InputLabel>
                   <div className="ck-body-wrapper">
                     {/* <DocumentEditor data={content} onChange={onHandleChange} /> */}
-                    {/* <CKEditor
-                      editor={ClassicEditor}
+                    <CKEditor
+                      editor={ClassicEditor as unknown as { create(...args: any[]): Promise<Editor> }}
                       data={content}
                       config={editorConfiguration}
                       onReady={(editor) => {
@@ -894,41 +914,44 @@ function BlogForm() {
                           setcontentValidation(false);
                         }
                       }}
-                      // onBlur={(event, editor) => {
-                      //   console.log('Blur.', editor);
-                      // }}
-                      // onFocus={(event, editor) => {
-                      //   console.log('Focus.', editor);
-                      // }}
-                    /> */}
+                    // onBlur={(event, editor) => {
+                    //   console.log('Blur.', editor);
+                    // }}
+                    // onFocus={(event, editor) => {
+                    //   console.log('Focus.', editor);
+                    // }}
+                    />
                   </div>
                   {contentValidation && (
-                    <Typography component="p" sx={{ color: 'red' }}> 
+                    <Typography component="p" sx={{ color: 'red' }}>
                       Enter Content
                     </Typography>
                   )}
                 </Stack>
               </Grid>
             </Grid>
-             <Grid container justifyContent="flex-end" alignItems="center">
-            <Grid item  mt={2}>
-                    <Stack direction="row"  spacing={2} alignItems="center">
-                      <Button color="error" onClick={handleClose}>
-                        Cancel
-                      </Button>
-                      <Button
-                variant="contained"
-                type="button"
-                sx={{  borderRadius: '20px',  background: '#000', '&:hover': {
-                  background: '#000'}  }}
-                disabled={!isSubmitting} // Disable the button while submitting
-                onClick={submitOrEdit}
-              >
-                {!openEdit ? 'Submit' : 'Update'}
-              </Button>
-                    </Stack>
-                  </Grid>
-                  </Grid>
+            <Grid container justifyContent="flex-end" alignItems="center">
+              <Grid item mt={2}>
+                <Stack direction="row" spacing={2} alignItems="center">
+                  <Button color="error" onClick={handleClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    type="button"
+                    sx={{
+                      borderRadius: '20px', background: '#000', '&:hover': {
+                        background: '#000'
+                      }
+                    }}
+                    disabled={!isSubmitting} // Disable the button while submitting
+                    onClick={submitOrEdit}
+                  >
+                    {!openEdit ? 'Submit' : 'Update'}
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
           </Stack>
         </Box>
       </Modal>

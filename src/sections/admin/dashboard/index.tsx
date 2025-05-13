@@ -14,18 +14,19 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import MainCard from 'components/MainCard';
-import  PopupTransition  from 'components/@extended/Transitions';
+import PopupTransition  from 'components/@extended/Transitions';
 import { CustomPagination } from 'components/customPagination';
 
 import { dispatch } from 'store';
 import { openSnackbar } from 'store/reducers/snackbar';
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import type { Editor } from '@ckeditor/ckeditor5-core';
 import axios from 'utils/axios';
-// import ReactTable from 'pages/tables/react-table/filtringv1';
+import ReactTable from 'components/tables/react-table/simpleTable';
 import AdminNav from 'components/AdminNav';
 import { FormControl } from '@mui/material';
 import { Select } from '@mui/material';
@@ -35,8 +36,10 @@ import { FormHelperText } from '@mui/material';
 import * as Yup from 'yup';
 import { Modal } from '@mui/base';
 import { Box } from '@mui/material';
-// import xcicle from 'assets/images/home/x-circle.png';
+const xcicle = '/assets/images/home/x-circle.png';
 import axiosServices from 'utils/axios';
+import Image from 'next/image';
+
 // ==============================|| FORMS VALIDATION - ADDRESS ||============================== //
 interface Props {
   data?: any;
@@ -115,90 +118,90 @@ const handlePrePgeCount = () => {
       });
   };
 
-  // const editorConfiguration = {
-  //   toolbar: {
-  //     items: [
-  //       'heading', '|',
-  //       'bold', 'italic', 'blockQuote', 'link',
-  //       'numberedList', 'bulletedList', 'imageUpload',
-  //       'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells',
-  //       'mediaEmbed', '|', 'undo', 'redo'
-  //     ],
-  //     shouldNotGroupWhenFull: true
-  //   },
-  //   toolbarSticky: true // ✅ this makes the toolbar sticky while scrolling
-  // };
-  // const jobsColumns: any = useMemo(
-  //   () => [
-  //     {
-  //       Header: 'State',
-  //       accessor: 'state'
-  //     },
-  //     {
-  //       Header: 'City',
-  //       accessor: 'city'
-  //     },
-  //     {
-  //       Header: 'SEO Title',
-  //       accessor: 'seo_title'
-  //     },
-  //     {
-  //       Header: 'SEO Description',
-  //       accessor: 'seo_description',
-  //       Cell: (value: any) => value?.row?.original?.seo_description ? (`${value?.row?.original?.seo_description.slice(0, 100)}...`) : {}
+  const editorConfiguration = {
+    toolbar: {
+      items: [
+        'heading', '|',
+        'bold', 'italic', 'blockQuote', 'link',
+        'numberedList', 'bulletedList', 'imageUpload',
+        'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells',
+        'mediaEmbed', '|', 'undo', 'redo'
+      ],
+      shouldNotGroupWhenFull: true
+    },
+    toolbarSticky: true // ✅ this makes the toolbar sticky while scrolling
+  };
+  const jobsColumns: any = useMemo(
+    () => [
+      {
+        Header: 'State',
+        accessor: 'state'
+      },
+      {
+        Header: 'City',
+        accessor: 'city'
+      },
+      {
+        Header: 'SEO Title',
+        accessor: 'seo_title'
+      },
+      {
+        Header: 'SEO Description',
+        accessor: 'seo_description',
+        Cell: (value: any) => value?.row?.original?.seo_description ? (`${value?.row?.original?.seo_description.slice(0, 100)}...`) : {}
 
-  //     },
+      },
       
-  //     {
-  //       Header: 'Content',
-  //       accessor: 'content',
-  //       Cell: (value: any) => value?.row?.original?.content ? (`${value?.row?.original?.content.slice(0, 100)}...`) : {}
-  //     },
-  //     {
-  //       Header: 'Keywords',
-  //       accessor: 'main_keyword'
-  //     },
-  //     {
-  //       Header: 'List Keywords',
-  //       accessor: 'lsi_keywords',
-  //       Cell: (value: any) => value?.row?.original?.lsi_keywords ? (`${value?.row?.original?.lsi_keywords.slice(0, 100)}...`) : {}
+      {
+        Header: 'Content',
+        accessor: 'content',
+        Cell: (value: any) => value?.row?.original?.content ? (`${value?.row?.original?.content.slice(0, 100)}...`) : {}
+      },
+      {
+        Header: 'Keywords',
+        accessor: 'main_keyword'
+      },
+      {
+        Header: 'List Keywords',
+        accessor: 'lsi_keywords',
+        Cell: (value: any) => value?.row?.original?.lsi_keywords ? (`${value?.row?.original?.lsi_keywords.slice(0, 100)}...`) : {}
 
-  //     },
-  //     {
-  //       Header: 'Action',
-  //       accessor: 'action',
-  //       Cell: (value: any) => {
-  //         console.log(typeof value?.row?.original?.status, '--------');
+      },
+      {
+        Header: 'Action',
+        accessor: 'action',
+        Cell: (value: any) => {
+          console.log(typeof value?.row?.original?.status, '--------');
 
-  //         return (
-  //           <Stack display="flex" flexDirection="row" justifyContent={'flex-end'}>
+          return (
+            <Stack display="flex" flexDirection="row" justifyContent={'flex-end'}>
 
-  //             <Button
-  //               variant="contained"
-  //               color="primary"
-  //               sx={{ mr: 1, borderRadius: '20px',  background: '#000', '&:hover': {
-  //                 background: '#000'} }}
-  //               onClick={() => {
-  //                 setEventType('Edit');
-  //                 handleDialogopen(value?.row?.original?.id);
-  //                 setCtyData(value?.row?.original)
-  //                 console.log(value?.row?.original, 'ppppppppp');
-  //                 handleAllStates()
-  //                 handleStateDetailByStatename(value?.row?.original?.state)
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mr: 1, borderRadius: '20px',  background: '#000', '&:hover': {
+                  background: '#000'} }}
+                onClick={() => {
+                  setEventType('Edit');
+                  handleDialogopen(value?.row?.original?.id);
+                  setCtyData(value?.row?.original)
+                  console.log(value?.row?.original, 'ppppppppp');
+                  handleAllStates()
+                  handleStateDetailByStatename(value?.row?.original?.state)
 
-  //               }}
+                }}
 
-  //             >
-  //               Edit
-  //             </Button>
+              >
+                Edit
+              </Button>
 
-  //           </Stack>
-  //         );
-  //       }
-  //     }
-  //   ],
-  //   []
-  // );
+            </Stack>
+          );
+        }
+      }
+    ],
+    []
+  );
   const handleDialog = () => {
 
     setOpen(false);
@@ -504,13 +507,13 @@ const handlePrePgeCount = () => {
             Add New City Content
           </Button>
         </Stack>
-        {/* {tableData?.data?.length > 0 && <ReactTable columns={jobsColumns} data={tableData.data} tableType={'filterable'} />} */}
+        {tableData?.data?.length > 0 && <ReactTable columns={jobsColumns} data={tableData.data} tableType={'filterable'} />}
         {tableData && (!windowWidth ? <Stack
                         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', width: '100%', p: 1 }}
                     >
                         <CustomPagination data={tableData} getNextPrev={getNextPrev} />
                     </Stack> : <Stack
-                        sx={{ py: 1 }}
+                        sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', py: 1 }}
                     >
                         <CustomPagination data={tableData} getNextPrev={getNextPrev} isMobile={windowWidth} handlePrePgeCount={handlePrePgeCount} handleNextPgeCount={handleNextPgeCount} />
                     </Stack>)}
@@ -521,6 +524,12 @@ const handlePrePgeCount = () => {
               onClick={handleDialog}
               sx={{ position: 'absolute', top: 10, right: '25px', cursor: 'pointer', zIndex: 9 }}
             >
+               <Image
+              height={20}
+              width={20}
+              src={xcicle}
+              alt={'xcicle'}
+            />
               {/* <img src={xcicle} height={'20px'} alt="xcicle" /> */}
             </Box>
             <FormikProvider value={formik}>
@@ -682,8 +691,8 @@ const handlePrePgeCount = () => {
                         <InputLabel htmlFor="content">City Content</InputLabel>
                         <div className="editor-wrapper" >
 
-                          {/* <CKEditor
-                            editor={ClassicEditor}
+                          <CKEditor
+                            editor={ClassicEditor as unknown as { create(...args: any[]): Promise<Editor> }}
                             data={values?.content}
 
                             config={editorConfiguration}
@@ -697,7 +706,7 @@ const handlePrePgeCount = () => {
                               setFieldValue('content', _data);
                               console.log({ _data });
                             }}
-                          /> */}
+                          />
                         </div>
                       </Stack>
                     </Grid>

@@ -24,7 +24,7 @@ const nextConfig = {
   env: {
     NEXT_APP_VERSION: 'v3.0.0',
     NEXTAUTH_SECRET: 'LlKq6ZtYbr+hTC073mAmAh9/h2HwMfsFo4hrfCx5mLg=',
-    // NEXTAUTH_URL: 'http://localhost:3000/',
+    NEXTAUTH_URL: 'http://localhost:3000/',
     PUBLIC_URL : 'https://alpha02.com/',
     // PUBLIC_URL : 'https://childrenkare.com/',
     NEXT_APP_GOOGLE_MAPS_API_KEY: 'AIzaSyAXv4RQK39CskcIB8fvM1Q7XCofZcLxUXw',

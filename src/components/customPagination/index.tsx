@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 
 interface AlertsCompProps {
@@ -21,19 +21,46 @@ export const CustomPagination = ({ data, getNextPrev, isMobile, handleNextPgeCou
       </Stack>
       <Stack direction={'row'} justifyContent={'space-between'} sx={{ width: '100%', my: {sm: 0, xs: 1}, px: 1}} >
          <ArrowLeft2 onClick={handlePrePgeCount} color='#000' size={28} style={{ border: '1px solid #343434', padding: 1, borderRadius: '5px', marginRight: "10px", cursor: 'pointer' }} />
-         <ArrowRight2 onClick={handleNextPgeCount} color='#000' size={28} style={{ border: '1px solid #343434', padding: 1, borderRadius: '5px', cursor: 'pointer' }} /> </Stack></Stack> : <ul className="pagination">
-        {data.links?.map((link: any, index: any) => (
-          <li key={index} className="page-item">
-            <a
-              style={{ cursor: 'pointer', color: link.active ? '#fff' : '#000', backgroundColor: !link.active ? '#fff' : '#000' }}
-              className={`page-link ${link.active ? 'active' : ''}`}
-              onClick={() => getNextPrev(link)}
-            >
-              <Typography sx={{ fontSize: '14px', fontWeight: 600 }}> {link.label.replace('&laquo;', '').replace('&raquo;', '')}</Typography>
-            </a>
-          </li>
-        ))}
-      </ul>}
+         <ArrowRight2 onClick={handleNextPgeCount} color='#000' size={28} style={{ border: '1px solid #343434', padding: 1, borderRadius: '5px', cursor: 'pointer' }} /> </Stack></Stack> : <Box
+  display="flex"
+  justifyContent="center"
+  alignItems="center"
+  gap={1}
+  component="ul"
+  sx={{
+    listStyle: 'none',
+    padding: 0,
+    marginTop: 2,
+  }}
+>
+  {data.links?.map((link: any, index: number) => (
+    <li key={index}>
+      <Button
+        onClick={() => getNextPrev(link)}
+        variant={link.active ? 'contained' : 'outlined'}
+        size="small"
+        sx={{
+          minWidth: 36,
+          height: 36,
+          padding: '4px 8px',
+          textTransform: 'none',
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: '14px',
+            fontWeight: 600,
+          }}
+        >
+          {link.label
+            .replace('&laquo;', '«')
+            .replace('&raquo;', '»')
+            .replace('&nbsp;', '')}
+        </Typography>
+      </Button>
+    </li>
+  ))}
+</Box>}
     </>
   );
 };

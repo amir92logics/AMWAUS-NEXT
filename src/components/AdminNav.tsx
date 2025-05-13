@@ -9,10 +9,11 @@ import {
   Toolbar,
   Typography,
   Button,
+  Stack,
 } from '@mui/material';
 
 const AdminNav: React.FC = () => {
-    const router = useRouter();
+  const router = useRouter();
 
 
   const handleLogout = () => {
@@ -31,19 +32,20 @@ const AdminNav: React.FC = () => {
             <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
               Admin Dashboard
             </Typography>
-
-            <Link href="/blogForm" color="inherit">
-              Blog Form
-            </Link>
-            {/* <Button component={Link} to="/city-content" color="inherit">
+            <Stack display={'flex'} direction={'row'} justifyContent={'center'} spacing={2}>
+              <Link href="/admin-blog" style={{ color: '#fff', fontWeight: 'bold', paddingRight: 4, textDecoration: 'none' }}>
+                Blog Form
+              </Link>
+              {/* <Button component={Link} to="/city-content" color="inherit">
               City Content
             </Button> */}
-            <Link href="/admin" color="inherit">
-            City Content
-            </Link>
-            <Button color="inherit" onClick={handleLogout}>
+              <Link href="/admin" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>
+                City Content
+              </Link>
+            <Button onClick={handleLogout}  style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>
               Logout
             </Button>
+            </Stack>
           </Toolbar>
         </Container>
       </AppBar>

@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent, useEffect } from 'react';
 
 import AuthWrapper from 'components/AuthWrapper';
 import axios from 'utils/axios';
@@ -50,6 +50,13 @@ const AdminLogin: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [checked, setChecked] = useState(false);
+
+useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user') || 'null');;
+    if (storedUser) {
+        router.push('/admin'); // Replace with your target route
+      }
+  }, []);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -124,6 +131,7 @@ const AdminLogin: React.FC = () => {
                         })
                           .then((response) => {
                             //console.log(response.data);
+                            debugger
                             const _tempData: any = response.data.data;
                             if (response.data.status === 'pass') {
                               localStorage.setItem('isNotification', 'true');
@@ -148,7 +156,7 @@ const AdminLogin: React.FC = () => {
                                   localStorage.setItem('user', JSON.stringify(response.data.data));
 
                                   router.push('/admin');
-                                  window.location.reload();
+                                  // window.location.reload();
                                 } 
                               }
                             }
