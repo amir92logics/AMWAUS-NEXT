@@ -7,8 +7,8 @@ import AboutUsSectionThree from 'sections/aboutus/AboutUsSectionThree';
 import AboutUsSectionFour from 'sections/aboutus/AboutUsSectionFour';
 // import NewSeoSection from 'sections/home/NewSeoSection';
 import { useTheme } from '@mui/material/styles';
-const bannerimage = '/assets/images/compresspics/about.webp';
-const aboutusmobilebg = '/assets/images/compresspics/aboutusmobilebg.webp';
+const bannerimage = '/assets/compresspics/about.webp';
+const aboutusmobilebg = '/assets/compresspics/aboutusmobilebg.webp';
 function AboutUs() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
